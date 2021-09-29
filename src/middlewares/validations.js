@@ -34,9 +34,17 @@ const IsLogged = (req, res, next) => {
 next()
 };
 
+const sessionOn = (req, res, next) => {
+    if(!req.session.user) {
+        return res.redirect('/pages/user/sign-in')
+    }
+next()
+};
+
 module.exports = {
     signUp,
     signIn,
     IsLogged,
+    sessionOn,
     
 }

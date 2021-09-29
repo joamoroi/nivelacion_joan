@@ -3,6 +3,7 @@ include header.pug
 
         
 <div class="container">
+  p= user 
   <div class="row">
     <div class="col-12 my-5">
       if userType == 0
@@ -10,7 +11,8 @@ include header.pug
           p.fs-3 Username
         each user, index in allusers
           p.my-4.text-center.border= user.username
-          button.col-md-2.offset-md-5.btn.btn-success Chat 
+          form(action=`/pages/message/toChat/${userId}/${user._id}`, method="get")
+            button.col-md-2.offset-md-5.btn.btn-success(type="submit") Chat 
         .mb-3.text-center
           a(href="/api/logout") Logout
       else if userType == 1

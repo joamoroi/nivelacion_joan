@@ -1,29 +1,20 @@
 const models = require('../models');
-const api = require('./api.controllers')
-
-const create = (req, res) => {
-
-    // let errorMessage;
-	// if (req.session.errorMessage) {
-	// 	errorMessage = req.session.errorMessage;
-	// 	delete req.session['errorMessage'];
-	// }
-    // res.render('messages.pug', { title: 'Messages', errorMessage });
-    res.json({message: 'message created'});
-};
+const api = require('./api.controllers');
+const services = require("../services");
 
 const chat = async (req, res) => {
-    // const { userOneId, userTwoId } = req.session;
-    const userOneId = "61521e7e9e841908b20e22ff"
-    const userTwoId = "61521e859e841908b20e2302"
-    req.body["userOneId"] = userOneId;
-    req.body["userTwoId"] = userTwoId
-    await api.chat(req, res);
-    // res.json({message: 'chat created'});
-};
+    try {
+      const { userOneId, userTwoId } = req.session;
+      // console.log({ userOneId, userTwoId });
+      const result = await services.message.chat(userOneId, userTwoId);
+      res.render('messages.pug', { title: 'Messages', userOneId, userTwoId, result });
+    } catch (err) {
+      // console.log({ err });
+      return res.json({ err });
+    }
+  };
 
 
 module.exports = {
-    create,
     chat,
 };

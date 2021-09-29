@@ -21,18 +21,19 @@ const signUp = (req, res) => {
 
 const users = async (req, res) => {
     let userType = 0;
+	let user;
 	if (req.session.user) {
-		const user = req.session.user;
+		user = req.session.user;
 		userType = user.admin ? 1 : 0;
 		
 	}
 	if (userType == 0) {
 		const allusers = await models.user.find({ username: { $ne: req.session.user.username } });
         // console.log(allusers)
-		return res.render('users.pug', { title: 'User', userType, allusers });
+		return res.render('users.pug', { title: 'User', userType, allusers, userId: user._id, });
 	}
 		const allusers = await models.user.find({ username: { $ne: req.session.user.username } });
-		res.render('users.pug', { title: 'User', userType, allusers });
+		return res.render('users.pug', { title: 'User', userType, allusers, userId: user._id, });
 };
 
 module.exports = {

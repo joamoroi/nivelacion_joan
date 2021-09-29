@@ -9,6 +9,6 @@ router.get('/sign-in', middlewares.validations.IsLogged ,controllers.user.signIn
 
 router.get('/sign-up', middlewares.validations.IsLogged, controllers.user.signUp);
 
-router.get('/users', controllers.user.users);
+router.get('/users', middlewares.validations.sessionOn,controllers.user.users);
 
 module.exports = router;

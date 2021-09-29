@@ -1,4 +1,5 @@
 const models = require('../models');
+const services = require("../services");
 
 // USERS
 
@@ -113,45 +114,23 @@ const create = async (req, res) => {
 };
 
 const chat = async (req, res) => {
-    try {
-      const { userOneId, userTwoId } = req.body;
-  
-      // console.log({ body: req.body });
-  
-      const userOne = await models.user.findById(userOneId);
-      if (!userOne) {
-        return res.json({ err: "El userOne no existe" });
-      }
-  
-      const userTwo = await models.user.findById(userTwoId);
-      if (!userTwo) {
-        return res.json({ err: "El userTwo no existe" });
-      }
-  
-      let result = [];
-  
-      const userList1 = await models.message.find({
-        userOne: userOne,
-        userTwo: userTwo,
-      });
-      if (userList1.length === 0) {
-        const usersList2 = await models.message.find({
-          userOne: userTwo,
-          userTwo: userOne,
-        });
-  
-        if (usersList2.length !== 0) {
-          result = usersList2;
-        }
-      } else {
-        result = userList1;
-      }
-  
-      return res.json({ messages: result });
-    } catch (err) {
-      return res.json({ err });
-    }
-  };
+  try {
+    const { userOneId, userTwoId } = req.body;
+    const result = await services.message.chat(userOneId, userTwoId);
+    return res.json({ messages: result });
+  } catch (err) {
+    return res.json({ err });
+  }
+};
+
+const toChat = (req, res) => {
+  const { userOneId, userTwoId } = req.params;
+
+  req.session.userOneId = userOneId;
+  req.session.userTwoId = userTwoId;
+  // console.log({ userOneId: userOneId, userTwoId:userTwoId })
+  return res.redirect("/pages/message/chat");
+};
 
 module.exports = {
     signIn,
@@ -160,4 +139,5 @@ module.exports = {
     deleteUser,
     create,
     chat,
+    toChat,
 };
