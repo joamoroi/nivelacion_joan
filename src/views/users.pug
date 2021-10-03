@@ -1,30 +1,32 @@
 include header.pug
 
-
+<link href="/css/styles-users.css" rel="stylesheet">
         
 <div class="container">
-  p= user 
   <div class="row">
-    <div class="col-12 my-5">
+    <div class="col-6 offset-3 my-5">
+      <div class="card">
+        <div class="card-header" style="text-align:center">
+          <h4 style="color:white"> User's List </h4>
+          <a href="/api/logout" style="color:white"> Logout </a>
+        </div>  
       if userType == 0
-        .mb-3.text-center
-          p.fs-3 Username
         each user, index in allusers
-          p.my-4.text-center.border= user.username
-          form(action=`/pages/message/toChat/${userId}/${user._id}`, method="get")
-            button.col-md-2.offset-md-5.btn.btn-success(type="submit") Chat 
-        .mb-3.text-center
-          a(href="/api/logout") Logout
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" style="text-align:center">User: #{user.username}</li>
+            form(action=`/pages/message/toChat/${userId}/${user._id}`, method="get")
+              button.my-2.col-md-4.offset-md-4.btn.btn-success(type="submit") Go To Chat 
+          </ul>
+          //- p.my-4.text-center= user.username         
       else if userType == 1
-        .mb-3.text-center
-          p.fs-3 Usernames
         each user, index in allusers  
-          p.my-4.text-center.border= user.username
-          button.col-md-2.offset-md-5.btn.btn-danger(onclick="DeleteUser(" + JSON.stringify(user) + ")") Delete
-          form(action=`/pages/message/toChat/${userId}/${user._id}`, method="get") 
-            button.my-2.col-md-2.offset-md-5.btn.btn-success(type="submit") Chat
-        .mb-3.m-4.text-center
-          a(href="/api/logout") Logout
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" style="text-align:center">User: #{user.username}</li>
+            form(action=`/pages/message/toChat/${userId}/${user._id}`, method="get") 
+              button.my-2.col-md-4.offset-md-4.btn.btn-success(type="submit") Go To Chat
+              button.col-md-4.offset-md-4.btn.btn-danger(onclick="DeleteUser(" + JSON.stringify(user) + ")") Delete User
+          </ul>
+        </div>  
     </div>
   </div>
 
