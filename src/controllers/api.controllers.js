@@ -106,7 +106,8 @@ const create = async (req, res) => {
       });
     }
 
-    return res.json({ message });
+    // return res.json({ message });
+    res.redirect(`/pages/message/toChat/${userOneId}/${userTwoId}`)
   } catch (err) {
     console.log(err)
     return res.json({ err });

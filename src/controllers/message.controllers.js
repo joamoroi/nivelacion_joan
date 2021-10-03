@@ -7,7 +7,12 @@ const chat = async (req, res) => {
       const { userOneId, userTwoId } = req.session;
       // console.log({ userOneId, userTwoId });
       const result = await services.message.chat(userOneId, userTwoId);
-      res.render('messages.pug', { title: 'Messages', userOneId, userTwoId, result });
+      // console.log(result)
+      const user = req.session.user
+      // const userTwo = await models.user.findById(userTwo)
+      // console.log(userTwo)
+      res.render('messages.pug', { title: 'Messages', userOneId, userTwoId, result, user });
+      // console.log({ userOneId, userTwoId });
     } catch (err) {
       // console.log({ err });
       return res.json({ err });

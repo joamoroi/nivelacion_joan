@@ -1,24 +1,56 @@
 include header.pug
 
+<link href="/css/styles-messages.css" rel="stylesheet">
 
 <div class="container">
     <div class="col-md-6 offset-md-3 mt-4">
         <div class="card">
             <div class="card-header" >
-                <h4 class="text-center">Let's Chat</h4> 
-                    <a href="/pages/user/users"> Exit Chat </a>
+                <h4 class="text-center" style="color:white">Let's Chat</h4>                   
+            .text-center
+                <a href="/pages/user/users" style="color:white"> Exit Chat </a>
             </div>
-
             <div class="card-body"></div>
-                p= result
-                <form class="footer">
+                each obj, index in result
+                    if obj.userOwner == user._id
+                        <p id="UserOwnerName"><u> User: #{user.username} </u> </p>
+                        <p id="UserOwnerText"> #{obj.text} </p>
+                    else
+                        <p id="UserTwoName"><u> User: Otro </u></p>
+                        <p id="UserTwoText"> #{obj.text} </p>
+                <form class="footer" method="post" action="/api/create" style="margin:10">
+                    <input type="text" hidden name="userOneId" id="userOneId" value=""/>
+                    <input type="text" hidden name="userTwoId" id="userTwoId" value=""/>
+                    <input type="text" hidden name="userOwnerId" id="userOwnerId" value=""/>
                     <div class="input-group">  
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" name="text">
                         <div class="input-group-append">
                             <input type="submit" class="btn btn-warning">
                         </div>
                     </div>
-                        </form>
-                            </div>
-                                </div>   
-                                    </div>
+                </form>
+            </div>
+        </div>   
+    </div>
+</div>
+
+script.
+    const userOneIdField = document.getElementById("userOneId");
+    const userOneId = "#{userOneId}"
+    //- console.log(userOneId)
+    userOneIdField.value = userOneId
+
+    const userTwoIdField = document.getElementById("userTwoId");
+    const userTwoId = "#{userTwoId}"
+    //- console.log(userTwoId)
+    userTwoIdField.value = userTwoId
+
+    const userOwnerIdField = document.getElementById("userOwnerId");
+    const userOwnerId = "#{user._id}"
+    //- console.log(userOwnerId)
+    userOwnerIdField.value = userOwnerId
+    
+        
+
+
+            
