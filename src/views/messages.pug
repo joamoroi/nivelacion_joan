@@ -16,7 +16,7 @@ include header.pug
                         <p id="UserOwnerName"><u> User: #{user.username} </u> </p>
                         <p id="UserOwnerText"> #{obj.text} </p>
                     else
-                        <p id="UserTwoName"><u> User: Otro </u></p>
+                        <p id="UserTwoName"><u> User: #{user2.username} </u></p>
                         <p id="UserTwoText"> #{obj.text} </p>
                 <form class="footer" method="post" action="/api/create" style="margin:10">
                     <input type="text" hidden name="userOneId" id="userOneId" value=""/>
