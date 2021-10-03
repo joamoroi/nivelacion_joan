@@ -12,15 +12,23 @@ body {
     background-color: #17a2b8;
 }
 
+.card-body-user {
+  background-color:rgb(240, 237, 232)
+}
+
+.card-body-user2 {
+  background-color:rgb(188, 223, 243)
+}
+
 #UserOwnerName { 
     margin-left: 10px;
     font-weight: 600;
-    color:orange
+    color:rgb(182, 120, 7)
   }
 
 #UserOwnerText {
     margin-left: 10px;
-    color:orange
+    color:rgb(182, 120, 7)
   }
 
 #UserTwoName {

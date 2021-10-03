@@ -14,7 +14,7 @@ include header.pug
         each user, index in allusers
           <ul class="list-group list-group-flush">
             <li class="list-group-item" style="text-align:center">User: #{user.username}</li>
-            form(action=`/pages/message/toChat/${userId}/${user._id}`, method="get")
+            form.mb-0(action=`/pages/message/toChat/${userId}/${user._id}`, method="get")
               button.my-2.col-md-4.offset-md-4.btn.btn-success(type="submit") Go To Chat 
           </ul>
           //- p.my-4.text-center= user.username         
@@ -22,7 +22,7 @@ include header.pug
         each user, index in allusers  
           <ul class="list-group list-group-flush">
             <li class="list-group-item" style="text-align:center">User: #{user.username}</li>
-            form(action=`/pages/message/toChat/${userId}/${user._id}`, method="get") 
+            form.mb-2(action=`/pages/message/toChat/${userId}/${user._id}`, method="get") 
               button.my-2.col-md-4.offset-md-4.btn.btn-success(type="submit") Go To Chat
               button.col-md-4.offset-md-4.btn.btn-danger(onclick="DeleteUser(" + JSON.stringify(user) + ")") Delete User
           </ul>

@@ -10,14 +10,19 @@ include header.pug
             .text-center
                 <a href="/pages/user/users" style="color:white"> Exit Chat </a>
             </div>
-            <div class="card-body"></div>
+            <div class="card-body" style="padding:10">
                 each obj, index in result
                     if obj.userOwner == user._id
+                      <div class="card-body-user">
                         <p id="UserOwnerName"><u> User: #{user.username} </u> </p>
                         <p id="UserOwnerText"> #{obj.text} </p>
+                      </div>  
                     else
+                      <div class="card-body-user2">
                         <p id="UserTwoName"><u> User: #{user2.username} </u></p>
                         <p id="UserTwoText"> #{obj.text} </p>
+                      </div>
+            </div> 
                 <form class="footer" method="post" action="/api/create" style="margin:10">
                     <input type="text" hidden name="userOneId" id="userOneId" value=""/>
                     <input type="text" hidden name="userTwoId" id="userTwoId" value=""/>
